@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     function getBooks() {
         $.ajax({
-            url: "http://localhost:8282/books"
+            url: "http://localhost:8080/apiBack/books"
         }).done(function (books) {
             printTitle(books);
             deleteLink();
@@ -43,7 +43,7 @@ $(document).ready(function () {
         }
 
         var myHeaders = new Headers({
-            'content-type': 'aplication/json'
+            'content-type': 'application/json'
         });
 
         var myInit = {
@@ -54,7 +54,7 @@ $(document).ready(function () {
             body: JSON.stringify(objToSend)
         };
 
-        fetch("http://localhost:8282/books/add", myInit).then(function (response) {
+        fetch("http://localhost:8080/apiBack/books", myInit).then(function (response) {
             clearBooks();
             getBooks();
             clearForm();
@@ -68,7 +68,7 @@ $(document).ready(function () {
             var div = $(e.target).parent().parent();
             var id = div.attr('id');
             var myHeaders = new Headers({
-                'content-type': 'aplication/json'
+                'content-type': 'application/json'
             });
 
             var myInit = {
@@ -78,7 +78,7 @@ $(document).ready(function () {
                 cache: 'default'
             };
 
-            fetch("http://localhost:8282/books/" + id, myInit).then(function (response) {
+            fetch("http://localhost:8080/apiBack/books/" + id, myInit).then(function (response) {
                 var url = response.url;
                 printInfo(url, div);
             });
@@ -91,7 +91,7 @@ $(document).ready(function () {
             e.preventDefault();
             var id = $(e.target).parent().parent().attr('id');
             var myHeaders = new Headers({
-                'content-type': 'aplication/json'
+                'content-type': 'application/json'
             });
 
             var myInit = {
@@ -101,7 +101,7 @@ $(document).ready(function () {
                 cache: 'default'
             };
 
-            fetch("http://localhost:8282/books/remove/" + id, myInit).then(function (response) {
+            fetch("http://localhost:8080/apiBack/books/" + id, myInit).then(function (response) {
                 clearBooks();
                 getBooks();
             });
